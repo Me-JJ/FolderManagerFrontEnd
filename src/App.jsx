@@ -1,10 +1,15 @@
 import React from "react";
 import Gallery from "./component/gallery";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 const App = () => {
   return (
     <div className="bg-neutral-900">
-      <Gallery />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Gallery />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
