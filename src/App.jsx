@@ -7,7 +7,7 @@ const App = () => {
     <div className="bg-neutral-900">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Gallery />} />
+          <Route path="/:page?" element={<Gallery />} />
         </Routes>
       </BrowserRouter>
     </div>

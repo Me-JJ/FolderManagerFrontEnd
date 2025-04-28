@@ -12,7 +12,6 @@ const IndImg = ({ src, date }) => {
       <div className="flex justify-between mx-2">
         <p className="text-sm text-neutral-400 font-mono ">
           {date.split("T")[0]}
-          {date}
         </p>
         <p className="text-sm text-neutral-400 font-mono ">
           {date.split("T")[1].split("Z")[0]}

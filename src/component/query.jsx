@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../util/button";
-const Query = ({ startDate, endDate, setStartDate, setEndDate }) => {
-  // const [startDate, setStartDate] = useState(new Date());
-  // const [endDate, setEndDate] = useState(new Date());
+
+const Query = ({ images, size }) => {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   return (
-    <div className="mb-5 flex flex-col items-center md:flex-row gap-5 justify-between md:justify-around p-2 py-5 sticky top-0 bg-black w-full ">
+    <div className="mb-5 flex flex-col items-center md:flex-row gap-5 justify-between md:justify-center p-2 py-5 sticky top-0 bg-black w-full ">
       <div className="flex flex-col justify-between md:flex-row md:justify-normal gap-3 items-center text-neutral-400 md:w-[500px]">
-        <p className="text-xl md:text-xl font-mono">Start Date : </p>
+        <p className="text-sm md:text-lg font-mono">Start Date : </p>
         <DatePicker
           className="bg-white rounded-lg text-black "
           showIcon
@@ -21,7 +22,7 @@ const Query = ({ startDate, endDate, setStartDate, setEndDate }) => {
         />
       </div>
       <div className="flex flex-col justify-between md:flex-row md:justify-normal gap-3 items-center text-neutral-400 md:w-[500px]">
-        <p className="text-xl md:text-xl font-mono">End Date :</p>
+        <p className="text-sm md:text-lg font-mono">End Date :</p>
         <DatePicker
           className="bg-white rounded-lg text-black"
           showIcon
@@ -32,7 +33,10 @@ const Query = ({ startDate, endDate, setStartDate, setEndDate }) => {
           onChange={(date) => setEndDate(date)}
         />
       </div>
-      <Button text={"Search"} />
+      <div className="flex justify-between items-center gap-10">
+        <Button text={"Search"} />
+        <p className="text-black text-sm md:text-md font-mono bg-neutral-300 hover:bg-neutral-100 rounded-2xl px-4 p-2">{`Total : ${size}`}</p>
+      </div>
     </div>
   );
 };
