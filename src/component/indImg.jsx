@@ -4,9 +4,9 @@ const IndImg = ({ src, date }) => {
   return (
     <div className="box-border">
       <img
-        src={`public/${src.split("/public")[1]}`}
+        src={`${src.split("/public")[1]}`}
         className="aspect-auto object-cover rounded-3xl"
-        alt={"image" + crypto.getRandomValues}
+        alt={"image" + crypto.randomUUID()}
         loading="lazy"
       />
       <div className="flex justify-between mx-2">

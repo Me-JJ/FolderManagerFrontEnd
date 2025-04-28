@@ -1,6 +1,7 @@
 import React from "react";
 import Gallery from "./component/gallery";
 import { BrowserRouter, Route, Routes } from "react-router";
+import GalleryFiltered from "./component/galleryFiltered";
 
 const App = () => {
   return (
@@ -8,6 +9,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/:page?" element={<Gallery />} />
+          <Route
+            path="/:startDate/:endDate?/:page"
+            element={<GalleryFiltered />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
