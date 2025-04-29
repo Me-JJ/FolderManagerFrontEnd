@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "../util/button";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Query = ({ size }) => {
   const [startDate, setStartDate] = useState(null);
@@ -42,7 +43,15 @@ const Query = ({ size }) => {
         <Button
           text={"Search"}
           handleSubmit={() => {
-            nav(`/${startDate?.getTime()}/${endDate?.getTime()}/${0}`);
+            if (startDate?.getTime() > endDate?.getTime()) {
+              Swal.fire({
+                icon: "error",
+                title: "End date must be after the start date...",
+                text: "Try Again!",
+              });
+            } else {
+              nav(`/${startDate?.getTime()}/${endDate?.getTime()}/${0}`);
+            }
           }}
         />
         <p className="text-black text-sm md:text-md font-mono bg-neutral-300 hover:bg-neutral-100 rounded-2xl px-4 p-2">{`Total : ${size}`}</p>

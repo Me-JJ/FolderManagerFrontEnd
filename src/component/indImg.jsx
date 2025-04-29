@@ -16,7 +16,7 @@ const IndImg = ({ src, date }) => {
     >
       <img
         src={`${src.split("/public")[1]}`}
-        className="aspect-auto object-cover rounded-3xl"
+        className="aspect-auto object-fill rounded-3xl"
         alt={"image" + crypto.randomUUID()}
         loading="lazy"
       />
