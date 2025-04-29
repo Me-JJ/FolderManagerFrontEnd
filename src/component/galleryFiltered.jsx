@@ -12,10 +12,6 @@ export default function GalleryFiltered() {
 
   // console.log(page, startDate, endDate);
 
-  if (startDate === "undefined") {
-    console.log("NAVIGATE TO /");
-    return <Navigate to={"/0"} />;
-  }
   const { images } = useFilterQuery(page, startDate, endDate, setLoading);
   // console.log(Number(page) >= Math.ceil(images.size / SIZE) - 1);
 
@@ -25,17 +21,18 @@ export default function GalleryFiltered() {
     <>
       <Query size={images.size} />
 
-      <p className="text-neutral-300 text-sm md:text-lg text-center my-2 ">
-        Images Created Between {"\t"}
+      <div className="text-neutral-300 text-sm md:text-lg text-center my-2 mb-4 flex justify-center items-center ">
         <span className="bg-orange-300 rounded-lg px-2 p-1 text-neutral-600">
           {new Date(Number(startDate)).toUTCString()}
         </span>
-        {" and "}
+        {"-------------------"}
         <span className="bg-indigo-300 rounded-lg px-2 p-1 text-neutral-600">
-          {new Date(Number(endDate)).toUTCString()}
+          {endDate === "undefined"
+            ? new Date().toUTCString()
+            : new Date(Number(endDate)).toUTCString()}
         </span>
-      </p>
-      <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4 p-2 max-w-[95%] mx-auto">
+      </div>
+      <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4 p-2 max-w-[95%] mx-auto mb-10">
         {images.metaDataList?.map((item, ind) => {
           return (
             <IndImg src={item.fileLoc} date={item.createdDate} key={ind} />

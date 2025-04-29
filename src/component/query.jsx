@@ -21,6 +21,7 @@ const Query = ({ size }) => {
           selected={startDate}
           isClearable
           closeOnScroll={true}
+          dateFormat="dd/MM/YYYY"
           onChange={(date) => setStartDate(date)}
         />
       </div>
@@ -33,6 +34,7 @@ const Query = ({ size }) => {
           selected={endDate}
           isClearable
           closeOnScroll={true}
+          dateFormat="dd/MM/YYYY"
           onChange={(date) => setEndDate(date)}
         />
       </div>

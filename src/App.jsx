@@ -2,6 +2,7 @@ import React from "react";
 import Gallery from "./component/gallery";
 import { BrowserRouter, Route, Routes } from "react-router";
 import GalleryFiltered from "./component/galleryFiltered";
+import SingleImage from "./component/singleImage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
             path="/:startDate/:endDate?/:page"
             element={<GalleryFiltered />}
           />
+          <Route path="/image/:path/:date?/:time?" element={<SingleImage />} />
         </Routes>
       </BrowserRouter>
     </div>
