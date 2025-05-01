@@ -10,3 +10,12 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+RUN THE PROJECT -
+
+    After clonning the project -> go to the folder => src/utils/location.js
+        update the location of the {LOC} as the location of your PUBLIC folder in react-app.
+        set the number of images to be shown in a web page as per the {SIZE} variable
+
+    npm i
+    npm run dev
