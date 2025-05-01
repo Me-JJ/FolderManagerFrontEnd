@@ -4,20 +4,29 @@ import Query from "./query";
 import useFilterQuery from "../hook/useFilteredQuery";
 import { SIZE } from "../util/location";
 import IndImg from "./indImg";
+import Error from "./error";
 
 export default function GalleryFiltered() {
   const { page, startDate, endDate } = useParams();
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState(null);
   const navigate = useNavigate();
 
   // console.log(page, startDate, endDate);
 
-  const { images } = useFilterQuery(page, startDate, endDate, setLoading);
+  const { images } = useFilterQuery(
+    page,
+    startDate,
+    endDate,
+    setLoading,
+    setErr
+  );
   // console.log(Number(page) >= Math.ceil(images.size / SIZE) - 1);
+  // console.log(images, err);
 
   return loading === true ? (
     <p className="text-4xl text-white text-center p-10">Loading...</p>
-  ) : (
+  ) : err == null ? (
     <>
       <Query size={images.size} />
 
@@ -39,14 +48,14 @@ export default function GalleryFiltered() {
           );
         })}
       </div>
-      <div className="flex justify-center gap-10 items-center">
+      <div className="flex justify-center gap-10 items-center py-10">
         {page === "0" ? (
-          <div className="p-2 px-4 text-2xl rounded-lg border border-black bg-gray-300 hover:cursor-not-allowed">
+          <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Prev
           </div>
         ) : (
           <div
-            className="p-2 px-4 text-2xl bg-fuchsia-300 rounded-lg border border-black "
+            className="p-2 px-4 text-sm md:text-lg border border-fuchsia-200 rounded-2xl text-neutral-300 hover:bg-fuchsia-200 hover:text-black transition-all duration-100 ease-in font-mono"
             onClick={() =>
               navigate(`/${startDate}/${endDate}/${Number(page) - 1}`)
             }
@@ -57,12 +66,12 @@ export default function GalleryFiltered() {
         <p className="text-4xl font-black text-amber-100">{page}</p>
 
         {Number(page) >= Math.ceil(images.size / SIZE) - 1 ? (
-          <div className="p-2 px-4 text-2xl rounded-lg border border-black bg-gray-300 hover:cursor-not-allowed">
+          <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Next
           </div>
         ) : (
           <div
-            className="p-2 px-4 text-2xl bg-fuchsia-300 rounded-lg border border-black"
+            className="p-2 px-4 text-sm md:text-lg border border-fuchsia-200 rounded-2xl text-neutral-300 hover:bg-fuchsia-200 hover:text-black transition-all duration-100 ease-in font-mono"
             onClick={() =>
               navigate(`/${startDate}/${endDate}/${Number(page) + 1}`)
             }
@@ -72,5 +81,7 @@ export default function GalleryFiltered() {
         )}
       </div>
     </>
+  ) : (
+    <Error err={err} />
   );
 }

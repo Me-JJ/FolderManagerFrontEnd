@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Button from "../util/button";
+import ButtonDelete from "../util/buttonDelete";
+
 import { LOC } from "../util/location";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -71,7 +73,7 @@ export default function SingleImage() {
           </p>
         )}
         <div className="flex justify-around gap-10">
-          <Button text={"Delete"} handleSubmit={handleDelete} />
+          <ButtonDelete text={"Delete"} handleSubmit={handleDelete} />
           <a href={`${LOC + "/" + path}`} download={path + crypto.randomUUID()}>
             <Button text={"Download"} />
           </a>

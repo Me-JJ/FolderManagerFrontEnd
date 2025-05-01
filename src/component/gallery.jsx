@@ -4,18 +4,19 @@ import Query from "./query";
 import useQuery from "../hook/useQuery";
 import { Link, useNavigate, useParams } from "react-router";
 import { SIZE } from "../util/location";
-
+import Error from "../component/error";
 const Gallery = () => {
   const { page } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { images } = useQuery(page, setLoading);
+  const [err, setErr] = useState(null);
+  const { images } = useQuery(page, setLoading, setErr);
 
   // console.log(Number(page), Math.ceil(images.size / SIZE));
 
   return loading === true ? (
     <p className="text-4xl text-white text-center p-10">Loading...</p>
-  ) : (
+  ) : err == null ? (
     <>
       <Query size={images.size} />
 
@@ -26,28 +27,28 @@ const Gallery = () => {
           );
         })}
       </div>
-      <div className="flex justify-center gap-10 items-center">
+      <div className="flex justify-center gap-10 items-center py-10">
         {page === "0" ? (
-          <div className="p-2 px-4 text-2xl rounded-lg border border-black bg-gray-300 hover:cursor-not-allowed">
+          <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Prev
           </div>
         ) : (
           <div
-            className="p-2 px-4 text-2xl bg-fuchsia-300 rounded-lg border border-black "
+            className="p-2 px-4 text-sm md:text-lg border border-fuchsia-200 rounded-2xl text-neutral-300 hover:bg-fuchsia-200 hover:text-black transition-all duration-100 ease-in font-mono"
             onClick={() => navigate(`/${Number(page) - 1}`)}
           >
             Prev
           </div>
         )}
-        <p className="text-4xl font-black text-amber-100">{page}</p>
+        <p className="text-lg md:text-2xl text-amber-100 font-mono">{page}</p>
 
         {Number(page) >= Math.ceil(images.size / SIZE) ? (
-          <div className="p-2 px-4 text-2xl rounded-lg border border-black bg-gray-300 hover:cursor-not-allowed">
+          <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Next
           </div>
         ) : (
           <div
-            className="p-2 px-4 text-2xl bg-fuchsia-300 rounded-lg border border-black"
+            className="p-2 px-4 text-sm md:text-lg border border-fuchsia-200 rounded-2xl text-neutral-300 hover:bg-fuchsia-200 hover:text-black transition-all duration-100 ease-in font-mono"
             onClick={() => navigate(`/${Number(page) + 1}`)}
           >
             Next
@@ -55,6 +56,8 @@ const Gallery = () => {
         )}
       </div>
     </>
+  ) : (
+    <Error err={err} />
   );
 };
 
