@@ -74,7 +74,7 @@ export default function SingleImage() {
         )}
         <div className="flex justify-around gap-10">
           <ButtonDelete text={"Delete"} handleSubmit={handleDelete} />
-          <a href={`${LOC + "/" + path}`} download={path + crypto.randomUUID()}>
+          <a href={`${LOC + "/" + path}`} download>
             <Button text={"Download"} />
           </a>
         </div>

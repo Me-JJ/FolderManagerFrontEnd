@@ -65,7 +65,7 @@ export default function GalleryFiltered() {
         )}
         <p className="text-4xl font-black text-amber-100">{page}</p>
 
-        {Number(page) >= Math.ceil(images.size / SIZE) - 1 ? (
+        {Number(page) >= Math.floor(images.size / SIZE) - 1 ? (
           <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Next
           </div>

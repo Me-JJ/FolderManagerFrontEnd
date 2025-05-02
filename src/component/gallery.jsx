@@ -42,7 +42,7 @@ const Gallery = () => {
         )}
         <p className="text-lg md:text-2xl text-amber-100 font-mono">{page}</p>
 
-        {Number(page) >= Math.ceil(images.size / SIZE) ? (
+        {Number(page) >= Math.floor(images.size / SIZE) ? (
           <div className="p-2 px-4 text-sm md:text-lg border border-neutral-200 rounded-2xl text-neutral-300 hover:bg-neutral-200 hover:text-black transition-all duration-100 ease-in font-mono hover:cursor-not-allowed">
             Next
           </div>
