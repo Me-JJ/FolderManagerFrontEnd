@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import Button from "../util/button";
 import ButtonDelete from "../util/buttonDelete";
 
@@ -15,6 +15,27 @@ export default function SingleImage() {
     loading: false,
   });
   const navigate = useNavigate();
+
+  async function handleDownload() {
+    const res = await axios({
+      method: "get",
+      url: `http://localhost:8080/download?fileLoc=${LOC + "/" + path}`,
+    });
+    // console.log(res.data);
+    if (res.data.data) {
+      Swal.fire({
+        title: res.data.data,
+        icon: "success",
+        draggable: true,
+      });
+    } else {
+      Swal.fire({
+        title: res.data.err,
+        icon: "error",
+        draggable: true,
+      });
+    }
+  }
 
   async function handleDelete() {
     Swal.fire({
@@ -74,9 +95,7 @@ export default function SingleImage() {
         )}
         <div className="flex justify-around gap-10">
           <ButtonDelete text={"Delete"} handleSubmit={handleDelete} />
-          <a href={`${LOC + "/" + path}`} download>
-            <Button text={"Download"} />
-          </a>
+          <Button text={"Download"} handleSubmit={handleDownload} />
         </div>
         <div className="flex justify-between text-neutral-300">
           <p>{date}</p>
